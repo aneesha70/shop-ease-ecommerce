@@ -1,0 +1,184 @@
+<!-- track.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Order - ShopEase</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+    .container {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .step .circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+    }
+    .step.completed .circle {
+      background: #28a745;
+    }
+    .step.completed .text {
+      color: #28a745;
+      font-weight: bold;
+    }
+    .text {
+      flex: 1;
+    }
+    .countdown {
+      margin-top: 1rem;
+      background: #e2f0ff;
+      color: #004085;
+      padding: 1rem;
+      border: 1px solid #b8daff;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .delay-warning {
+      background: #fff3cd;
+      color: #856404;
+      padding: 1rem;
+      border: 1px solid #ffeeba;
+      border-radius: 6px;
+      margin-top: 1rem;
+      font-weight: bold;
+      display: none;
+    }
+    .map-mockup {
+      margin-top: 2rem;
+      background: url('https://i.imgur.com/G7SdDgF.png') no-repeat center center;
+      background-size: cover;
+      height: 200px;
+      border-radius: 10px;
+      border: 2px dashed #ccc;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #eee;
+    }
+    a {
+      display: inline-block;
+      margin-top: 2rem;
+      text-align: center;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🚚 Track Your Order</h1>
+  </header>
+
+  <div class="container">
+    <h2>Order Status</h2>
+    <div class="steps">
+      <div class="step" id="step1">
+        <div class="circle">1</div>
+        <div class="text">Packed</div>
+      </div>
+      <div class="step" id="step2">
+        <div class="circle">2</div>
+        <div class="text">Shipped</div>
+      </div>
+      <div class="step" id="step3">
+        <div class="circle">3</div>
+        <div class="text">Out for Delivery</div>
+      </div>
+      <div class="step" id="step4">
+        <div class="circle">4</div>
+        <div class="text">Delivered</div>
+      </div>
+    </div>
+
+    <div class="countdown" id="countdownText">Loading estimated delivery...</div>
+    <div class="delay-warning" id="delayMsg">
+      ⚠️ Your order seems delayed. Please contact support if not delivered within 7 days.
+    </div>
+
+    <div class="map-mockup"></div>
+
+    <a href="index.html">🔙 Back to Home</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 ShopEase. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Simulate progress based on estimated delivery countdown from localStorage
+    const history = JSON.parse(localStorage.getItem("orderHistory")) || [];
+    const latestOrder = history[history.length - 1];
+    if (latestOrder && latestOrder.date) {
+      const orderDate = new Date(latestOrder.date);
+      const today = new Date();
+      const diff = Math.floor((today - orderDate) / (1000 * 60 * 60 * 24));
+      const eta = 3 + Math.floor(Math.random() * 3); // 3–5 days delivery
+
+      const countdownText = document.getElementById("countdownText");
+      const daysLeft = eta - diff;
+      countdownText.innerText = daysLeft > 0
+        ? `📦 Estimated delivery in ${daysLeft} day${daysLeft > 1 ? 's' : ''}`
+        : `📦 Expected delivery today or very soon!`;
+
+      const step1 = document.getElementById("step1");
+      const step2 = document.getElementById("step2");
+      const step3 = document.getElementById("step3");
+      const step4 = document.getElementById("step4");
+      const delayMsg = document.getElementById("delayMsg");
+
+      if (diff >= 0) step1.classList.add("completed");
+      if (diff >= 1) step2.classList.add("completed");
+      if (diff >= 2) step3.classList.add("completed");
+      if (diff >= 3) step4.classList.add("completed");
+
+      if (diff > 7) delayMsg.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

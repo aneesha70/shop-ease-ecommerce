@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Product Details</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .product-detail {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .product-detail img {
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 1rem;
+    }
+
+    .product-detail h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-detail p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>ShopEase</h1>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="product.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="cart.html">Cart</a></li>
+    </ul>
+  </nav>
+
+  <div class="product-detail" id="product-detail">
+  </div>
+
+  <script>
+    const product = JSON.parse(localStorage.getItem('selectedProduct'));
+    const detailContainer = document.getElementById('product-detail');
+
+    if (product) {
+      detailContainer.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" />
+        <h2>${product.name}</h2>
+        <p><strong>Price:</strong> ₹${product.price}</p>
+        <p>${product.description}</p>
+      `;
+    } else {
+      detailContainer.innerHTML = "<p>Product details not found.</p>";
+    }
+  </script>
+</body>
+</html>

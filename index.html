@@ -1,0 +1,224 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopEase - Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .search-bar {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
+    .search-bar input {
+      padding: 0.4rem 2.5rem 0.4rem 2.5rem;
+      width: 200px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .search-bar button {
+      margin-left: 10px;
+      padding: 0.4rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #555;
+      color: white;
+      cursor: pointer;
+    }
+    .search-bar button:hover {
+      background: #333;
+    }
+    #noResults {
+      text-align: center;
+      margin-top: 1rem;
+      color: #888;
+      font-style: italic;
+    }
+    .btn-group button.buy-btn {
+      background: #007BFF;
+    }
+    .btn-group button.buy-btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">🛍️ ShopEase</div>
+    <nav style="display: flex; align-items: center; gap: 1rem;">
+      <a href="index.html">Home</a>
+      <a href="product.html">Products</a>
+      <a href="cart.html">Cart</a>
+      <a href="orders.html">Orders</a>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search products..." onkeyup="filterProducts()">
+        <button onclick="clearSearch()">Clear</button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to ShopEase</h1>
+    <p>Best Deals | Great Quality | Fast Delivery</p>
+  </section>
+
+  <section class="products">
+    <h2>All Products</h2>
+    <div class="product-grid" id="productGrid">
+      <div class="product-card">
+        <img src="images/product1.jpg" alt="Smart Watch" />
+        <h3>Smart Watch</h3>
+        <p class="price">₹1999</p>
+        <p>Track fitness, notifications, and heart rate.</p>
+        <div class="btn-group">
+          <button class="btn view-btn" onclick="showDetails('Smart Watch', '₹1999', 'Track fitness, notifications, and heart rate.')">View</button>
+          <button class="btn cart-btn" onclick="addToCart('Smart Watch', 1999)">Add to Cart</button>
+          <!-- <button class="btn buy-btn">Buy</button> -->
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="images/product2.jpg" alt="Wireless Headphones" />
+        <h3>Wireless Headphones</h3>
+        <p class="price">₹1499</p>
+        <p>Enjoy HD music and noise cancellation on the go.</p>
+        <div class="btn-group">
+          <button class="btn view-btn" onclick="showDetails('Wireless Headphones', '₹1499', 'Enjoy HD music and noise cancellation on the go.')">View</button>
+          <button class="btn cart-btn" onclick="addToCart('Wireless Headphones', 1499)">Add to Cart</button>
+          <!-- <button class="btn buy-btn">Buy</button> -->
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="images/product3.jpg" alt="Fitness Band" />
+        <h3>Fitness Band</h3>
+        <p class="price">₹999</p>
+        <p>Count steps, calories, and stay active daily.</p>
+        <div class="btn-group">
+          <button class="btn view-btn" onclick="showDetails('Fitness Band', '₹999', 'Count steps, calories, and stay active daily.')">View</button>
+          <button class="btn cart-btn" onclick="addToCart('Fitness Band', 999)">Add to Cart</button>
+          <!-- <button class="btn buy-btn">Buy</button> -->
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="images/product4.jpg" alt="Bluetooth Speaker" />
+        <h3>Bluetooth Speaker</h3>
+        <p class="price">₹1199</p>
+        <p>Portable and powerful sound for every occasion.</p>
+        <div class="btn-group">
+          <button class="btn view-btn" onclick="showDetails('Bluetooth Speaker', '₹1199', 'Portable and powerful sound for every occasion.')">View</button>
+          <button class="btn cart-btn" onclick="addToCart('Bluetooth Speaker', 1199)">Add to Cart</button>
+          <!-- <button class="btn buy-btn">Buy</button> -->
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="images/product5.jpg" alt="Gaming Mouse" />
+        <h3>Gaming Mouse</h3>
+        <p class="price">₹799</p>
+        <p>Ergonomic design with fast DPI response for gamers.</p>
+        <div class="btn-group">
+          <button class="btn view-btn" onclick="showDetails('Gaming Mouse', '₹799', 'Ergonomic design with fast DPI response for gamers.')">View</button>
+          <button class="btn cart-btn" onclick="addToCart('Gaming Mouse', 799)">Add to Cart</button>
+          <!-- <button class="btn buy-btn">Buy</button> -->
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="images/product6.jpg" alt="Laptop Stand" />
+        <h3>Laptop Stand</h3>
+        <p class="price">₹599</p>
+        <p>Foldable, sturdy, and posture-friendly design.</p>
+        <div class="btn-group">
+          <button class="btn view-btn" onclick="showDetails('Laptop Stand', '₹599', 'Foldable, sturdy, and posture-friendly design.')">View</button>
+          <button class="btn cart-btn" onclick="addToCart('Laptop Stand', 599)">Add to Cart</button>
+          <!-- <button class="btn buy-btn">Buy</button> -->
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="images/product7.jpg" alt="USB Hub" />
+        <h3>USB Hub</h3>
+        <p class="price">₹349</p>
+        <p>Connect multiple devices with one sleek port hub.</p>
+        <div class="btn-group">
+          <button class="btn view-btn" onclick="showDetails('USB Hub', '₹349', 'Connect multiple devices with one sleek port hub.')">View</button>
+          <button class="btn cart-btn" onclick="addToCart('USB Hub', 349)">Add to Cart</button>
+          <!-- <button class="btn buy-btn">Buy</button> -->
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="images/product8.jpg" alt="Mobile Tripod" />
+        <h3>Mobile Tripod</h3>
+        <p class="price">₹499</p>
+        <p>Capture steady photos & videos with ease and style.</p>
+        <div class="btn-group">
+          <button class="btn view-btn" onclick="showDetails('Mobile Tripod', '₹499', 'Capture steady photos & videos with ease and style.')">View</button>
+          <button class="btn cart-btn" onclick="addToCart('Mobile Tripod', 499)">Add to Cart</button>
+          <!-- <button class="btn buy-btn">Buy</button> -->
+        </div>
+      </div>
+    </div>
+    <p id="noResults" style="display: none;">No products match your search.</p>
+  </section>
+
+  <!-- Product Detail Modal -->
+  <div class="product-modal" id="productModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeDetails()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalPrice"></p>
+      <p id="modalDesc"></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 ShopEase. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function showDetails(title, price, desc) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalPrice').innerText = price;
+      document.getElementById('modalDesc').innerText = desc;
+      document.getElementById('productModal').style.display = 'block';
+    }
+
+    function closeDetails() {
+      document.getElementById('productModal').style.display = 'none';
+    }
+
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${name} added to cart!`);
+    }
+
+    function filterProducts() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.product-card');
+      let matchFound = false;
+
+      cards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const desc = card.querySelector('p').textContent.toLowerCase();
+        const isMatch = title.includes(input) || desc.includes(input);
+        card.style.display = isMatch ? 'block' : 'none';
+        if (isMatch) matchFound = true;
+      });
+
+      document.getElementById('noResults').style.display = matchFound ? 'none' : 'block';
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      filterProducts();
+    }
+
+    window.onload = () => {
+      filterProducts();
+    };
+  </script>
+</body>
+</html>
